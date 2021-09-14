@@ -1,5 +1,62 @@
 ## Container-Teknologi inlämning 2 ##
 
+
+```yaml
+version: "3.8"
+services: 
+ flask:
+  container_name: flaskcontainer
+  build:
+   context: ./app
+   dockerfile: Dockerfile.dev
+  ports:
+   - "5000:5000"
+  depends_on: 
+   - db
+  networks:
+    - flask_app_net
+ db:
+  container_name: dbcontainer
+  image: postgres:latest
+  restart: always
+  environment: 
+   POSTGRES_DB: mydb
+   POSTGRES_PASSWORD: postgres
+   POSTGRES_USER: postgres
+  volumes:
+   - postgres_data:/var/lib/postgresql/data/
+  networks:
+   - flask_app_net
+       
+networks:   
+  flask_app_net:
+      driver: bridge
+
+volumes:
+ postgres_data:
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1. [x] Vad är Docker(plattformen)?
 
 
