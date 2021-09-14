@@ -1,5 +1,10 @@
-## Container-Teknologi inlämning 2 ##
+# Container-Teknologi inlämning 2 #
+- [Docker-compose](#Docker-compose)
+- [Flask-app](#Flask-app)
+- [Multi-Stage-Build](#Multi-Stage-Build)
+- [Mysql-Persistent-Data](#Mysql-Persistent-Data)
 
+## Docker-compose
 
 ```yaml
 version: "3.8"
@@ -35,7 +40,16 @@ networks:
 volumes:
  postgres_data:
 ```
+# Del 2 praktiskt #
 
+## Flask-app ##
+
+
+
+## Multi-Stage-Build
+
+
+## Mysql-Persistent-Data
 
 
 
