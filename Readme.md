@@ -3,6 +3,7 @@
 - [Flask-app](#Flask-app)
 - [Multi-Stage-Build](#Multi-Stage-Build)
 - [Mysql-Persistent-Data](#Mysql-Persistent-Data)
+- [Frågor](#Frågor)
 
 ## Docker-compose
 
@@ -52,6 +53,7 @@ volumes:
 ## Mysql-Persistent-Data
 
 
+# Del 3 Projekt
 
 
 
@@ -68,8 +70,7 @@ volumes:
 
 
 
-
-
+# Frågor
 
 1. [x] Vad är Docker(plattformen)?
 
