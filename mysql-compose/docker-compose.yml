@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  db:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_memo:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: iamtheuser
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_PASSWORD: mypassword
+volumes:
+  mysql_memo:
+
+
