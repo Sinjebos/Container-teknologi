@@ -8,48 +8,76 @@
 ## Docker-compose
 
 ```yaml
-version: "3.8"
-services: 
- flask:
-  container_name: flaskcontainer
-  build:
-   context: ./app
-   dockerfile: Dockerfile.dev
-  ports:
-   - "5000:5000"
-  depends_on: 
+version: "3.8"          - Specificerar vilken version av Docker-compose
+services:               - tillåter att köra tjänster under detta
+ flask:                 - Namnet på första servicen, kan heta vad som
+  container_name: flaskcontainer  - Ger containern namnet "flaskcontainer"
+  build:                - Här specifieras att docker-compose ska börja bygga
+    context: ./app      - Vilken fil docker-compose skall titta i för hitta sin Dockerfile
+   dockerfile: Dockerfile.dev - pga att Docker filen inte heter bara "Dockerfile" så behövs det specifieras 
+  ports:                - tillåter att öppna portar
+   - "5000:5000"        - Gör så ens lokala lyssnar på port 5000 och containern lyssnar på 5000
+  depends_on:           - Specifierar att db skall byggas först
    - db
-  networks:
+  networks:             - Ger "flask" nätverket flask_app_net
     - flask_app_net
- db:
-  container_name: dbcontainer
-  image: postgres:latest
-  restart: always
-  environment: 
-   POSTGRES_DB: mydb
-   POSTGRES_PASSWORD: postgres
-   POSTGRES_USER: postgres
-  volumes:
+ db:                    - namn på andra servicenn
+  container_name: dbcontainer   - Ger containern namnet "dbcontainr"
+  image: postgres:latest        - hämtar senaste postgres image från dockerhub
+  restart: always               - startar alltid om containern om den stannar
+  environment:                  - variabler
+   POSTGRES_DB: mydb            - db namn i postgres
+   POSTGRES_PASSWORD: postgres  - lösenord till postgres
+   POSTGRES_USER: postgres      - användarnamn till postgres
+  volumes:  - länkar lokala files "postgres_data" till containern
    - postgres_data:/var/lib/postgresql/data/
-  networks:
+  networks: - Ger "db" nätverket flask_app_net
    - flask_app_net
        
-networks:   
-  flask_app_net:
-      driver: bridge
+networks:  - nätverk
+  flask_app_net:  - namnet på nätverket
+      driver: bridge  - vilken bridge den skall ha
 
-volumes:
- postgres_data:
+volumes:        - skapar lokal volume
+ postgres_data: - namnet på lokala volume
 ```
 # Del 2 praktiskt #
 
 ## Flask-app ##
 
+Började med att skapa alla filer och sedan kopiera in allt som skulle med som kod till app.py och flask==2.0.1 till requirements.txt.
+Skapade sedan Dockerfile efter vad som behövdes till att köra app.py koden
 
+Körde sedan docker kommandon för att bygga imagen och starta containern
+```python
+Docker build -p 5000:5000 -t sinjebos/flask-app .
+Docker image ls
+Docker container run <image id>
+```
+Och besökte sedan localhost:5000 för att se "Hello World" som bilden nedan
+
+![](img/5.png)
+
+Efter allt funkade och fick upp "hello world" så gjorde jag
+```python
+docker push <image name>
+```
+
+![](img/1.png)
 
 ## Multi-Stage-Build
 
+Här börja jag med att skapa Dockerfile och använda mig utav Node då jag jobbat med det som mest.
 
+![](img/8.png)
+
+
+
+![](img/6.png)
+
+
+
+![](img/7.png)
 ## Mysql-Persistent-Data
 
 
