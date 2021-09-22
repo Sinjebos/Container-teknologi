@@ -50,9 +50,8 @@ Skapade sedan Dockerfile efter vad som behövdes till att köra app.py koden
 
 Körde sedan docker kommandon för att bygga imagen och starta containern
 ```python
-Docker build -p 5000:5000 -t sinjebos/flask-app .
-Docker image ls
-Docker container run <image id>
+Docker build -t sinjebos/flask-app .
+Docker run -p 5000:5000 sinjebos/flask-app
 ```
 Och besökte sedan localhost:5000 för att se "Hello World" som bilden nedan
 
@@ -65,38 +64,75 @@ docker push <image name>
 
 ![](img/1.png)
 
-- [Back to top](#Container-Teknologi-inlämning-2)
+- [Back To Top](#Container-Teknologi-inlämning-2)
+
 ## Multi-Stage-Build
 
 Här börja jag med att skapa Dockerfile och använda mig utav Node då jag jobbat med det som mest.
 
+
 ![](img/8.png)
 
+Körde mer eller mindre samma kommandon som förra delen fast med annat image namn och andra portar för nginx
 
+```python
+Docker build .
+Docker run -p 80:80 -v ${pwd}:/usr/share/nginx/html <image id>
+```
+
+När jag väl öppna localhost på port 80 så kunde jag ändra och live uppdatera innuti imagen med hjälp av volumes se bilderna nedan
 
 ![](img/6.png)
 
 
 
 ![](img/7.png)
+
 ## Mysql-Persistent-Data
 
+jag börja med att skapa en docker-compose.yml och bygga den efter hur uppgiften lyder.
+
+Viktigaste delen i det hela är att se hur volumes fungerar och hur det sparar allt i containern i det lokala docker filsystemet
+![](img/3.png)
+
+Som i bilden är jag även inne i containern redan och gått in i mysqls terminal med hjälp kommandon:
+```python
+docker-compose up -d
+docker container ls
+docker exec -it <container id> bash/sh
+mysql -U myuser -pmypassword
+```
+
+Efter jag varit inne i containern och kört så skall jag stänga ner den och ta bort den existerande containern och det gör jag med och sedan starta en ny
+
+```python
+docker-compose down
+docker-compose up -d
+```
+
+![](img/2.png)
+
+Efter jag den har tagit bort den gamla och startat den nya containern så kan jag igen gå in i mysql och listar allt som finns i min db så finns "jack" kvar med hjälp av volumes
+
+![](img/4.png)
 
 # Del 3 Projekt
 
 
 
+![](img/9.png)
 
 
 
+![](img/10.png)
 
 
 
+![](img/11.png)
 
 
 
-
-
+![](img/12.png)
 
 
 # Frågor
