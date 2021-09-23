@@ -14,17 +14,17 @@ services:               - tillåter att köra tjänster under detta
   container_name: flaskcontainer  - Ger containern namnet "flaskcontainer"
   build:                - Här specifieras att docker-compose ska börja bygga
     context: ./app      - Vilken fil docker-compose skall titta i för hitta sin Dockerfile
-   dockerfile: Dockerfile.dev - pga att Docker filen inte heter bara "Dockerfile" så behövs det specifieras 
+   dockerfile: Dockerfile.dev - pga att Dockerfile har .dev efter sig så behövs så behövs det specifieras vilken fil
   ports:                - tillåter att öppna portar
    - "5000:5000"        - Gör så ens lokala lyssnar på port 5000 och containern lyssnar på 5000
   depends_on:           - Specifierar att db skall byggas först
    - db
   networks:             - Ger "flask" nätverket flask_app_net
     - flask_app_net
- db:                    - namn på andra servicenn
-  container_name: dbcontainer   - Ger containern namnet "dbcontainr"
+ db:                    - namn på andra servicen
+  container_name: dbcontainer   - Ger containern namnet "dbcontainer"
   image: postgres:latest        - hämtar senaste postgres image från dockerhub
-  restart: always               - startar alltid om containern om den stannar
+  restart: always               - startar alltid om containern om den kraschar eller diverse nerstängning
   environment:                  - variabler
    POSTGRES_DB: mydb            - db namn i postgres
    POSTGRES_PASSWORD: postgres  - lösenord till postgres
@@ -36,7 +36,7 @@ services:               - tillåter att köra tjänster under detta
        
 networks:  - nätverk
   flask_app_net:  - namnet på nätverket
-      driver: bridge  - vilken bridge den skall ha
+      driver: bridge  - vilken driver den skall ha
 
 volumes:        - skapar lokal volume
  postgres_data: - namnet på lokala volume
@@ -88,6 +88,8 @@ När jag väl öppna localhost på port 80 så kunde jag ändra och live uppdate
 
 ![](img/7.png)
 
+- [Back To Top](#Container-Teknologi-inlämning-2)
+
 ## Mysql-Persistent-Data
 
 jag börja med att skapa en docker-compose.yml och bygga den efter hur uppgiften lyder.
@@ -112,13 +114,15 @@ docker-compose up -d
 
 ![](img/2.png)
 
-Efter jag den har tagit bort den gamla och startat den nya containern så kan jag igen gå in i mysql och listar allt som finns i min db så finns "jack" kvar med hjälp av volumes
+Efter den har tagit bort den gamla och startat den nya containern så kan jag igen gå in i mysql och listar allt som finns i min db så finns "jack" kvar med hjälp av volumes
 
 ![](img/4.png)
 
+- [Back To Top](#Container-Teknologi-inlämning-2)
+
 # Del 3 Projekt
 
-Börja med att bygga en ny docker-compose fil för postgres och för den aktuella Dockerfile i samma directory
+Började med att bygga en ny docker-compose fil för postgres och för den aktuella Dockerfile i samma directory
 
 ![](img/9.png)
 
@@ -144,24 +148,38 @@ så finns all data jag skickat in från hemsidan
 ![](img/12.png)
 
 
+- [Back To Top](#Container-Teknologi-inlämning-2)
+
 # Frågor
 
 1. [x] Vad är Docker(plattformen)?
 
+- Docker är en programvara för att skapa, distribuera och hantera virtualiserade applikations containers på ett gemensamt operativsystem
+
 
 2. [x] Vad är en Docker Image och hur relaterar en sådan till Docker Containers?
+
+- När man bygger en Dockerfile så blir det till en image, och i sin kan man köra docker run <image id> för att starta den till att bli en container
 
 
 3. [x] Vad innebär containerteknologi?
 
+- Containerteknologi är en metod för att packa ett program såatt det kan köras isolerat från andra processer
 
 4. [x] Vad är Docker Registry?
 
+- Docker Registry är vart man skapar sina repository för images som pushar till hub docker
 
 5. [x] Hur lyder Docker Linux Kernels arbetsbeskrivning (vad den gör och hur det går till)?
 
+- Docker använder resursisolering i Linux kärnan, tillexempel kärnnamn(namespaces) för att tillåta oberoende containers att köras inom en enda Linux instans
 
 6. [x] På vilket sätt kan Docker och Docker Containers jämföras med fartygstransporter?
 
+- Om man säger att fartyget är Linux lastat fullt med containers så är varje container unik med sitt innehåll och vid leverans (portar) så skickas de till olika ställen
 
-7. [x] - Vad händer när vi har en Dockerfile och kör "docker build ."? Gå igenom build-processen
+7. [x] Vad händer när vi har en Dockerfile och kör "docker build ."? Gå igenom build-processen
+
+- När man kör docker build . i terminalen så skickas det till docker daemon som i sedan tur börjar bygga Dockerfile steg för steg. Varje steg i builden baserar på det tidigare steget så skulle man köra bygget igen men gjort en ändring så kommer docker daemon behöva börja om från där ändringen skett.
+
+- [Back To Top](#Container-Teknologi-inlämning-2)
