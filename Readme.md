@@ -118,18 +118,27 @@ Efter jag den har tagit bort den gamla och startat den nya containern så kan ja
 
 # Del 3 Projekt
 
-
+Börja med att bygga en ny docker-compose fil för postgres och för den aktuella Dockerfile i samma directory
 
 ![](img/9.png)
+
+När jag körde docker-compose up och gick in på localhost:5000/submit så kunde jag skicka in vilken data som helst men namn för enkelhetens skull till databasen
 
 
 
 ![](img/10.png)
 
+Efter att jag skickade in "Niklas" så går den tillbaka och visar "My awesome home page" fast i submit istället för enbart localhost:5000
 
 
 ![](img/11.png)
 
+När jag gick in i postsql databasens container och körde
+
+```python
+select * from myratings;
+```
+så finns all data jag skickat in från hemsidan
 
 
 ![](img/12.png)
