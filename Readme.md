@@ -3,6 +3,7 @@
 - [Flask-app](#Flask-app)
 - [Multi-Stage-Build](#Multi-Stage-Build)
 - [Mysql-Persistent-Data](#Mysql-Persistent-Data)
+- [Del-3-Projekt](#Del-3-Projekt)
 - [Frågor](#Frågor)
 
 ## Docker-compose
@@ -123,7 +124,7 @@ Efter den har tagit bort den gamla och startat den nya containern så kan jag ig
 
 - [Back To Top](#Container-Teknologi-inlämning-2)
 
-# Del 3 Projekt
+# Del-3-Projekt
 
 Började med att bygga en ny docker-compose fil för postgres och för den aktuella Dockerfile i samma directory
 
